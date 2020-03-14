@@ -56,7 +56,7 @@ install_dep() {
 install_golangcilint() {
 
   echo "Installing golangci-lint."
-  curl -sFL https://install.goreleaser.com/github.com/golangci/golangci-lint.sh | sh -s -- -b $GOBINDIR
+  curl -sSFL https://install.goreleaser.com/github.com/golangci/golangci-lint.sh | sh -s -- -b $GOBINDIR
 
 }
 
