@@ -3,7 +3,7 @@
 TAR="tar"
 GOPATH=$(go env GOPATH)
 GOBINDIR=$GOPATH/bin
-INSTALL_GOMETALINTER=${INSTALL_GOMETALINTER:-yes}
+INSTALL_GOLANGCILINT=${INSTALL_GOLANGCILINT:-yes}
 
 
 install_tools_darwin() {
@@ -53,24 +53,15 @@ install_dep() {
   chmod +x "$DEPBIN"
 }
 
-install_gometalinter() {
-  LINTER_VER="3.0.0"
-  LINTER_TARBALL="gometalinter-${LINTER_VER}-linux-amd64.tar.gz"
-  LINTER_URL="https://github.com/alecthomas/gometalinter/releases/download/v${LINTER_VER}/${LINTER_TARBALL}"
+install_golangcilint() {
 
-  if type gometalinter >/dev/null 2>&1; then
-    echo "gometalinter already installed"
-    return
-  fi
+  echo "Installing golangci-lint."
+  curl -sFL https://install.goreleaser.com/github.com/golangci/golangci-lint.sh | sh -s -- -b $GOBINDIR
 
-  echo "Installing gometalinter. Version: ${LINTER_VER}"
-  curl -L -o "$GOBINDIR/$LINTER_TARBALL" $LINTER_URL
-  $TAR -zxf "$GOBINDIR/$LINTER_TARBALL" --overwrite --strip-components 1 --exclude={COPYING,*.md} -C "$GOBINDIR"
-  rm -f "$GOBINDIR/$LINTER_TARBALL"
 }
 
 bootstrap_platform
 install_dep
-if [ "$INSTALL_GOMETALINTER" == "yes" ];then
-    install_gometalinter
+if [ "$INSTALL_GOLANGCILINT" == "yes" ];then
+    install_golangcilint
 fi
