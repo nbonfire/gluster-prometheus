@@ -56,7 +56,7 @@ install_dep() {
 install_golangcilint() {
 
   echo "Installing golangci-lint."
-  curl -sSFL https://install.goreleaser.com/github.com/golangci/golangci-lint.sh | sh -s -- -b $GOBINDIR
+  curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin v1.23.8
 
 }
 
