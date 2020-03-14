@@ -2,7 +2,7 @@
 
 # Checks if the tools required for properly building, verifying and testing are installed.
 
-TOOLS=(dep gometalinter)
+TOOLS=(dep golangci-lint)
 
 MISSING=0
 
